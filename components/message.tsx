@@ -91,38 +91,38 @@ const PurePreviewMessage = ({
             )}
 
             {(message.content || message.reasoning) && mode === 'view' && (
-                <div
+              <div
                 data-testid="message-content"
                 className="flex flex-row gap-2 items-start "
-                >
+              >
                 {message.role === 'user' && !isReadonly && (
                   <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                    data-testid={`message-edit`}
-                    variant="ghost"
-                    className="px-2 h-fit rounded-full text-muted-foreground opacity-0 group-hover/message:opacity-100"
-                    onClick={() => {
-                      setMode('edit');
-                    }}
-                    >
-                    <PencilEditIcon />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Edit message</TooltipContent>
+                    <TooltipTrigger asChild>
+                      <Button
+                        data-testid={`message-edit`}
+                        variant="ghost"
+                        className="px-2 h-fit rounded-full text-muted-foreground opacity-0 group-hover/message:opacity-100"
+                        onClick={() => {
+                          setMode('edit');
+                        }}
+                      >
+                        <PencilEditIcon />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>Edit message</TooltipContent>
                   </Tooltip>
                 )}
 
                 <div
                   className={cn('flex flex-col gap-4', {
-                  'bg-primary text-primary-foreground px-3 py-2 rounded-xl':
-                    message.role === 'user',
-                  'text-green-600': true, // Added text color green
+                    'bg-primary text-primary-foreground px-3 py-2 rounded-xl':
+                      message.role === 'user',
+                    'text-green-600': true, // Added text color green
                   })}
                 >
                   <Markdown>{message.content as string}</Markdown>
                 </div>
-                </div>
+              </div>
             )}
 
             {message.content && mode === 'edit' && (

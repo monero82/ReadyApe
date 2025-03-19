@@ -1,9 +1,6 @@
 'use client';
 
-import type {
-  Attachment,
-  Message,
-} from 'ai';
+import type { Attachment, Message } from 'ai';
 import cx from 'classnames';
 import type React from 'react';
 import {
@@ -27,7 +24,7 @@ import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
 import { SuggestedActions } from './suggested-actions';
 import equal from 'fast-deep-equal';
-import type { UseChatHelpers, } from '@ai-sdk/react';
+import type { UseChatHelpers } from '@ai-sdk/react';
 
 function PureMultimodalInput({
   chatId,
@@ -252,10 +249,6 @@ function PureMultimodalInput({
           }
         }}
       />
-
-      <div className="absolute bottom-0 p-2 w-fit flex flex-row justify-start">
-        <AttachmentsButton fileInputRef={fileInputRef} status={status} />
-      </div>
 
       <div className="absolute bottom-0 right-0 p-2 w-fit flex flex-row justify-end">
         {status === 'submitted' ? (

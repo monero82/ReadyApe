@@ -32,7 +32,7 @@ export const myProvider = isTestEnvironment
           model: fireworks('accounts/fireworks/models/deepseek-r1'),
           middleware: extractReasoningMiddleware({ tagName: 'think' }),
         }),
-        'title-model':  new AIClient(),
+        'title-model': new AIClient(),
         'artifact-model': new AIClient(),
       },
       imageModels: {

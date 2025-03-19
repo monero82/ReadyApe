@@ -2,21 +2,15 @@
 
 import { type ReactNode, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { cn } from '@/lib/utils';
 
-import {
-  CheckCircleFillIcon,
-  ChevronDownIcon,
-  GlobeIcon,
-  LockIcon,
-} from './icons';
+import { GlobeIcon, LockIcon, FileIcon, ImageIcon } from './icons';
 import { useChatVisibility } from '@/hooks/use-chat-visibility';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
 export type VisibilityType = 'private' | 'public';
 
@@ -40,7 +34,7 @@ const visibilities: Array<{
   },
 ];
 
-export function VisibilitySelector({
+export function NextFeatures({
   chatId,
   className,
   selectedVisibilityType,
@@ -61,12 +55,32 @@ export function VisibilitySelector({
   );
 
   return (
-    <Button
-    data-testid="model-selector"
-    variant="outline"
-    className="md:px-2 md:h-[34px]"
-  >
-   The Next Features
-  </Button>
+    <>
+      <Button
+        data-testid="model-selector"
+        variant="outline"
+        className="md:px-2 md:h-[34px]"
+        onClick={() => setOpen(true)}
+      >
+        The Next Features
+      </Button>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Upcoming Features</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="flex items-center space-x-2">
+              <FileIcon />
+              <span>Read and process files</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <ImageIcon />
+              <span>Read and process images</span>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }

@@ -834,7 +834,7 @@ export const ChevronDownIcon = ({ size = 16 }: { size?: number }) => (
 export const SparklesIcon = ({ size = 16 }: { size?: number }) => (
   <img
     src={`/images/ready_ape.png`}
-    alt={"ready_ape logo"}
+    alt={'ready_ape logo'}
     width={size}
     height={size}
     style={{ borderRadius: '50%' }}

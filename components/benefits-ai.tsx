@@ -1,24 +1,18 @@
 'use client';
 
-import { startTransition, useMemo, useOptimistic, useState } from 'react';
-
-import { saveChatModelAsCookie } from '@/app/(chat)/actions';
+import { useMemo, useOptimistic, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { chatModels } from '@/lib/ai/models';
-import { cn } from '@/lib/utils';
-
-import { CheckCircleFillIcon, ChevronDownIcon } from './icons';
 
 // Add Dialog component import
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
-export function ModelSelector({
+export function BenefitsAI({
   selectedModelId,
   className,
 }: {
@@ -53,13 +47,20 @@ export function ModelSelector({
             <DialogHeader>
               <DialogTitle>Benefits of AI</DialogTitle>
             </DialogHeader>
-            <ul>
-              <li>1. Automation of repetitive tasks</li>
-              <li>2. Enhanced decision-making</li>
-              <li>3. Improved efficiency and productivity</li>
-              <li>4. Advanced data analysis</li>
-              <li>5. Personalized user experiences</li>
-            </ul>
+            <p>
+              Artificial Intelligence (AI) enables the automation of repetitive
+              tasks, freeing up valuable time for individuals and organizations
+              to focus on more strategic activities. It enhances decision-making
+              by analyzing vast amounts of data and providing actionable
+              insights, leading to improved efficiency and productivity.
+            </p>
+            <p>
+              Additionally, AI excels in advanced data analysis, uncovering
+              patterns and trends that might otherwise go unnoticed. It also
+              facilitates personalized user experiences by tailoring
+              interactions and recommendations to individual preferences, making
+              technology more intuitive and user-friendly.
+            </p>
           </DialogContent>
         </Dialog>
       )}
