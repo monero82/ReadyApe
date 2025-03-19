@@ -7,6 +7,7 @@ type LanguageModelV1TextPart = {
 
 
 async function fetchStream(url: string, data: any): Promise<ReadableStream<LanguageModelV1StreamPart>> {
+  
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -62,6 +63,34 @@ async function fetchStream(url: string, data: any): Promise<ReadableStream<Langu
   });
 }
 
+async function fetchResponse(url: string, data: any): Promise<string> {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data ),
+  });
+
+  if (!response.body) {
+    throw new Error("Response body is null");
+  }
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let resultText = "";
+
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) {
+      break;
+    }
+    resultText += decoder.decode(value, { stream: true });
+  }
+
+  return resultText;
+}
+
 class AIClient implements LanguageModelV1 {
   readonly specificationVersion = "v1";
   readonly url : string = process.env.AI_API_URL || "http://localhost:8000/stream";
@@ -79,7 +108,6 @@ class AIClient implements LanguageModelV1 {
     provider,
     modelId,
     supportsUrl,
-    doGenerate,
     defaultObjectGenerationMode,
     supportsStructuredOutputs,
   }: {
@@ -94,53 +122,26 @@ class AIClient implements LanguageModelV1 {
     this.modelId = modelId || "default-model";
     this.supportsUrl = supportsUrl;
     this.doGenerate = async ({ inputFormat, prompt }) => {
-      const lastMessage: LanguageModelV1TextPart = prompt[prompt.length - 1]?.content[0] as LanguageModelV1TextPart;
+      
     
-      if (!lastMessage) {
-        throw new Error("Prompt is empty or invalid");
-      }
-    
-      const response = await fetch(this.url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ prompt: lastMessage.text }),
-      });
-    
-      if (!response.body) {
-        throw new Error("Response body is null");
-      }
-    
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let resultText = "";
-    
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) {
-          break;
-        }
-        resultText += decoder.decode(value, { stream: true });
-      }
-    
-      return {text: resultText , finishReason: "stop" , usage: {
-        promptTokens: 0,
-        completionTokens: 0
-    }, rawCall: {rawPrompt: lastMessage, rawSettings: {}},};
-    };
-    this.doStream = async ({ inputFormat, prompt }) => {
-      const lastMessage : LanguageModelV1TextPart    = prompt[prompt.length - 1]?.content[0] as LanguageModelV1TextPart;
-    
-      if (!lastMessage) {
-        throw new Error("Prompt is empty or invalid");
-      }
-     
+      const resultText = await fetchResponse(this.url, { prompt: prompt });
     
       return {
-        stream: await fetchStream(this.url, { prompt: lastMessage.text }),
+        text: resultText,
+        finishReason: "stop",
+        usage: {
+          promptTokens: 0,
+          completionTokens: 0,
+        },
+        rawCall: { rawPrompt: prompt, rawSettings: {} },
+      };
+    };
+    this.doStream = async ({ inputFormat, prompt }) => {
+      
+      return {
+        stream: await fetchStream(this.url, { prompt: prompt }),
         rawCall: {
-          rawPrompt: lastMessage,
+          rawPrompt: prompt,
           rawSettings: {},
         },
       };
