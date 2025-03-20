@@ -3,6 +3,7 @@
 - [X] Add link explaining the benefits of AI
 - [X] Plan next features
 - [X] Implement color grouping for messages (e.g., another group in blue)
-- [ ] Add authentication (Google + basic authentication)
+- [X] Add authentication (Google + basic authentication)
 - [ ] Check payment gateway integration: https://nowpayments.io
 - [X] Enable sending all messages
+- [ ] change the logo in auth and change  text in chat
