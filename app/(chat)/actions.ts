@@ -27,7 +27,8 @@ export async function generateTitleFromUserMessage({
     - you will generate a short title based on the first message a user begins a conversation with
     - ensure it is not more than 40 characters long
     - the title should be a summary of the user's message
-    - do not use quotes, colons, or double quotes`,
+    - do not use quotes, colons, or double quotes
+    - avoid using single quotes (') and double quotes (")`,
     prompt: JSON.stringify(message),
   });
 

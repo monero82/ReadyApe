@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 
 import { MessageIcon, VercelIcon } from './icons';
 
@@ -21,16 +20,13 @@ export const Overview = () => {
         </p>
         <p>
           This is{' '}
-          <span
-            className="font-medium underline underline-offset-4 "
-          >
+          <span className="font-medium underline underline-offset-4 ">
             Ready Ape
           </span>
           , a chatbot leveraging a multi-modal and reasoning model. It combines
           advanced AI capabilities to deliver a seamless and intelligent chat
           experience.
         </p>
-       
       </div>
     </motion.div>
   );

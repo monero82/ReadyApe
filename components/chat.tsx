@@ -2,7 +2,7 @@
 
 import type { Attachment, Message } from 'ai';
 import { useChat } from '@ai-sdk/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
 import { ChatHeader } from '@/components/chat-header';
 import type { Vote } from '@/lib/db/schema';
@@ -62,8 +62,51 @@ export function Chat({
   const [attachments, setAttachments] = useState<Array<Attachment>>([]);
   const isArtifactVisible = useArtifactSelector((state) => state.isVisible);
 
+  const [submissionCount, setSubmissionCount] = useState(0);
+  const [showPayPalDialog, setShowPayPalDialog] = useState(false);
+
+  const handleInputSubmit = () => {
+    setSubmissionCount((prev) => prev + 1);
+    handleSubmit();
+  };
+
+  useEffect(() => {
+    if (submissionCount === 3) {
+      setShowPayPalDialog(true);
+    }
+  }, [submissionCount]);
+
+  const closePayPalDialog = () => {
+    setShowPayPalDialog(false);
+  };
+
   return (
     <>
+      {showPayPalDialog && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+          <div className="bg-black text-white p-6 rounded shadow-lg">
+            <h2 className="text-lg font-bold">Payment Required</h2>
+            <p className="mt-2">Please proceed to PayPal to continue using the service.</p>
+            <div className="mt-4 flex justify-end gap-2">
+              <button
+                className="px-4 py-2 bg-gray-700 text-white rounded"
+                onClick={closePayPalDialog}
+              >
+                Cancel
+              </button>
+              <a
+                href="https://www.paypal.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 bg-blue-600 text-white rounded"
+              >
+                Pay with PayPal
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="flex flex-col min-w-0 h-dvh bg-background">
         <ChatHeader
           chatId={id}
@@ -89,7 +132,7 @@ export function Chat({
               chatId={id}
               input={input}
               setInput={setInput}
-              handleSubmit={handleSubmit}
+              handleSubmit={handleInputSubmit}
               status={status}
               stop={stop}
               attachments={attachments}

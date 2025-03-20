@@ -15,6 +15,7 @@ export const authConfig = {
       const isOnChat = nextUrl.pathname.startsWith('/');
       const isOnRegister = nextUrl.pathname.startsWith('/register');
       const isOnLogin = nextUrl.pathname.startsWith('/login');
+      const isOnGoogleAuth = nextUrl.pathname.startsWith('/api/auth');
 
       if (isLoggedIn && (isOnLogin || isOnRegister)) {
         return Response.redirect(new URL('/', nextUrl as unknown as URL));
@@ -24,8 +25,15 @@ export const authConfig = {
         return true; // Always allow access to register and login pages
       }
 
+      if (isOnGoogleAuth) {
+        return true; // Always allow access to Google auth page
+      }
+
       if (isOnChat) {
         if (isLoggedIn) return true;
+
+        console.log('path ', nextUrl.pathname);
+
         return false; // Redirect unauthenticated users to login page
       }
 
