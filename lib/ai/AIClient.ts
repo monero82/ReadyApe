@@ -34,31 +34,17 @@ async function fetchStream(
         }
 
         const chunk = decoder.decode(value, { stream: true });
+        console.log(chunk);
+        try {
+          controller.enqueue({
+            type: 'text-delta',
+            textDelta: chunk ,
+          });
+        
+        } catch (err) {
+          console.error('Error parsing stream chunk:', err);
+        }
 
-        // Process the chunk into LanguageModelV1StreamPart
-        chunk.split('\n').forEach((line) => {
-          if (line) {
-            try {
-              controller.enqueue({
-                type: 'text-delta',
-                textDelta: line,
-              });
-              if (!line) {
-                controller.enqueue({
-                  type: 'finish',
-                  finishReason: 'stop',
-                  usage: {
-                    promptTokens: 0,
-                    completionTokens: 0,
-                  },
-                });
-                controller.close();
-              }
-            } catch (err) {
-              console.error('Error parsing stream chunk:', err);
-            }
-          }
-        });
       }
     },
   });
