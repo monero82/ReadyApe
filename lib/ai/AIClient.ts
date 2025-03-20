@@ -34,7 +34,6 @@ async function fetchStream(
         }
 
         const chunk = decoder.decode(value, { stream: true });
-        console.log(chunk);
         try {
           controller.enqueue({
             type: 'text-delta',

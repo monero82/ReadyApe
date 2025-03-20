@@ -63,7 +63,7 @@ export const {
         const [userDB] = await getUser(user.email as string);
 
         if (!userDB) {
-          await createUser(user.email as string, 'passwordfsadfsdfsadf');
+          await createUser(user.email as string, process.env.NEXTAUTH_SECRET as string);
         }
       }
       return true;

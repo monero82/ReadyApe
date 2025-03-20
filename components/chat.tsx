@@ -91,6 +91,7 @@ export function Chat({
               <button
                 className="px-4 py-2 bg-gray-700 text-white rounded"
                 onClick={closePayPalDialog}
+                type='button'
               >
                 Cancel
               </button>
