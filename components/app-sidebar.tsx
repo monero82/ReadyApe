@@ -3,7 +3,7 @@
 import type { User } from 'next-auth';
 import { useRouter } from 'next/navigation';
 
-import { PlusIcon } from '@/components/icons';
+import { PlusIcon, UserIcon } from '@/components/icons';
 import { SidebarHistory } from '@/components/sidebar-history';
 import { SidebarUserNav } from '@/components/sidebar-user-nav';
 import { Button } from '@/components/ui/button';
@@ -61,7 +61,22 @@ export function AppSidebar({ user }: { user: User | undefined }) {
       <SidebarContent>
         <SidebarHistory user={user} />
       </SidebarContent>
-      <SidebarFooter>{user && <SidebarUserNav user={user} />}</SidebarFooter>
+      <SidebarFooter>
+        {user && <SidebarUserNav user={user} />}
+        {!user && (
+          <div className="flex flex-row justify-center">
+            <Button
+              className="bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-zinc-200 text-zinc-50 dark:text-zinc-900  md:flex py-1.5 px-2 h-fit md:h-[34px]  w-2/3"
+              onClick={() => {
+                router.push('/login');
+              }}
+            >
+              <UserIcon />
+              Login
+            </Button>
+          </div>
+        )}
+      </SidebarFooter>
     </Sidebar>
   );
 }

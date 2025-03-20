@@ -1,8 +1,9 @@
 import { compare } from 'bcrypt-ts';
 import NextAuth, { type User, type Session } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
 
-import { getUser } from '@/lib/db/queries';
+import { createUser, getUser } from '@/lib/db/queries';
 
 import { authConfig } from './auth.config';
 
@@ -29,11 +30,17 @@ export const {
         return users[0] as any;
       },
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    }),
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
+      const [userDB] = await getUser(token.email as string);
+
+      if (userDB) {
+        token.id = userDB.id;
       }
 
       return token;
@@ -50,6 +57,16 @@ export const {
       }
 
       return session;
+    },
+    async signIn({ user, account, profile, email, credentials }) {
+      if (account?.provider === 'google') {
+        const [userDB] = await getUser(user.email as string);
+
+        if (!userDB) {
+          await createUser(user.email as string, 'passwordfsadfsdfsadf');
+        }
+      }
+      return true;
     },
   },
 });

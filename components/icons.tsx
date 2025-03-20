@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export const BotIcon = () => {
   return (
     <svg
@@ -832,7 +834,7 @@ export const ChevronDownIcon = ({ size = 16 }: { size?: number }) => (
 );
 
 export const SparklesIcon = ({ size = 16 }: { size?: number }) => (
-  <img
+  <Image
     src={`/images/ready_ape.png`}
     alt={'ready_ape logo'}
     width={size}
