@@ -115,7 +115,7 @@ const PurePreviewMessage = ({
 
                 <div
                   className={cn('flex flex-col gap-4', {
-                    'bg-primary text-primary-foreground px-3 py-2 rounded-xl':
+                    'bg-gray-800 text-primary-foreground px-3 py-2 rounded-xl':
                       message.role === 'user',
                     'text-green-600': true, // Added text color green
                   })}

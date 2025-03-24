@@ -183,11 +183,7 @@ function PureMultimodalInput({
 
   return (
     <div className="relative w-full flex flex-col gap-4">
-      {messages.length === 0 &&
-        attachments.length === 0 &&
-        uploadQueue.length === 0 && (
-          <SuggestedActions append={append} chatId={chatId} />
-        )}
+   
 
       <input
         type="file"
@@ -228,7 +224,7 @@ function PureMultimodalInput({
         value={input}
         onChange={handleInput}
         className={cx(
-          'min-h-[24px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-2xl !text-base bg-muted pb-10 dark:border-zinc-700',
+          'min-h-[24px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-2xl !text-base bg-muted pb-10 dark:border-zinc-700 bg-[#4682B4]',
           className,
         )}
         rows={2}
@@ -337,14 +333,14 @@ function PureSendButton({
   return (
     <Button
       data-testid="send-button"
-      className="rounded-full p-1.5 h-fit border dark:border-zinc-600"
+      className="rounded-full p-1.5 h-fit border dark:border-zinc-600 size-[40px]"
       onClick={(event) => {
         event.preventDefault();
         submitForm();
       }}
       disabled={input.length === 0 || uploadQueue.length > 0}
     >
-      <ArrowUpIcon size={14} />
+      <ArrowUpIcon size={24} />
     </Button>
   );
 }

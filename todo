@@ -8,9 +8,9 @@
 - [X] Enable sending all messages
 - [X] change the logo in auth and change  text in chat
 
-- [ ] change background of user text dark grey
-- [ ] change icons hello text and change it with logo app
-- [ ] remove the four 
-- [ ] change color of send msg 
+- [X] change background of user text dark grey
+- [X] change icons hello text and change it with logo app
+- [X] remove the four 
+- [X] change color of send msg 
 - [X] logo of ready ape + and name of app + subtitle
-- [ ] keep just copy
+- [X] keep just copy

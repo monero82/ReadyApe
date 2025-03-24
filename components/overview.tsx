@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 import { MessageIcon, VercelIcon } from './icons';
 
@@ -14,9 +15,16 @@ export const Overview = () => {
     >
       <div className="rounded-xl p-6 flex flex-col gap-8 leading-relaxed text-center max-w-xl">
         <p className="flex flex-row justify-center gap-4 items-center">
-          <VercelIcon size={32} />
-          <span>+</span>
-          <MessageIcon size={32} />
+           <div className="size-70 rounded-full border-2 border-white flex items-center justify-center mx-auto">
+                   <Image
+                 src="/images/ready_ape.png"
+                 alt="ready ape Logo"
+                 width={170}
+                 height={170}
+                 className="rounded-full"
+                   />
+                  
+                   </div>
         </p>
         <p>
           This is{' '}
