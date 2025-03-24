@@ -86,7 +86,7 @@ export function Chat({
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
           <div className="bg-black text-white p-6 rounded shadow-lg">
             <h2 className="text-lg font-bold">Payment Required</h2>
-            <p className="mt-2">Please proceed to PayPal to continue using the service.</p>
+            <p className="mt-2">Oops! Servers are busy. Upgrade to a paid plan for priority access.</p>
             <div className="mt-4 flex justify-end gap-2">
               <button
                 className="px-4 py-2 bg-gray-700 text-white rounded"
@@ -96,12 +96,12 @@ export function Chat({
                 Cancel
               </button>
               <a
-                href="https://www.paypal.com"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-2 bg-blue-600 text-white rounded"
               >
-                Pay with PayPal
+                Pay
               </a>
             </div>
           </div>
