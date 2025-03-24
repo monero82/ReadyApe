@@ -50,13 +50,25 @@ export default function Page() {
 
   return (
     <div className="flex h-dvh w-screen items-start pt-12 md:pt-0 md:items-center justify-center bg-background">
+  
       <div className="w-full max-w-md overflow-hidden rounded-2xl flex flex-col gap-4">
-        <div className="flex flex-col items-center justify-center gap-2 px-4 text-center sm:px-16">
-          <h3 className="text-xl font-semibold dark:text-zinc-50">Sign In</h3>
-          <p className="text-sm text-gray-500 dark:text-zinc-400">
-            Use your email and password to sign in
-          </p>
-        </div>
+
+      <div className="size-70 rounded-full border-2 border-white flex items-center justify-center mx-auto">
+          <Image
+        src="/images/ready_ape.png"
+        alt="ready ape Logo"
+        width={200}
+        height={200}
+        className="rounded-full"
+          />
+         
+          </div>
+
+          <div className="text-center mt-4">
+            <h1 className="text-2xl font-bold text-white">Ready Ape</h1>
+            <p className="text-sm text-gray-300 mb-3">A chatbot AI that answers every request</p></div>
+
+       
         <AuthForm action={handleSubmit} defaultEmail={email}>
           <SubmitButton isSuccessful={isSuccessful}>Sign in</SubmitButton>
         </AuthForm>
