@@ -14,7 +14,7 @@ export const Overview = () => {
       transition={{ delay: 0.5 }}
     >
       <div className="rounded-xl p-6 flex flex-col gap-8 leading-relaxed text-center max-w-xl">
-        <p className="flex flex-row justify-center gap-4 items-center">
+        <div className="flex flex-row justify-center gap-4 items-center">
            <div className="size-70 rounded-full border-2 border-white flex items-center justify-center mx-auto">
                    <Image
                  src="/images/ready_ape.png"
@@ -25,7 +25,7 @@ export const Overview = () => {
                    />
                   
                    </div>
-        </p>
+        </div>
         <p>
           This is{' '}
           <span className="font-medium underline underline-offset-4 ">
