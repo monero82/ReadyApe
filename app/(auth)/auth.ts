@@ -33,7 +33,6 @@ export const {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-      checks: ["none"],
     }),
   ],
   callbacks: {
@@ -64,7 +63,7 @@ export const {
         const [userDB] = await getUser(user.email as string);
 
         if (!userDB) {
-          await createUser(user.email as string, process.env.NEXTAUTH_SECRET as string);
+          await createUser(user.email as string, process.env.AUTH_SECRET as string);
         }
       }
       return true;
