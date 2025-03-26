@@ -7,8 +7,8 @@ import { createUser, getUser } from '@/lib/db/queries';
 
 import { authConfig } from './auth.config';
 
-interface ExtendedSession extends Session {
-  user: User;
+export interface ExtendedSession extends Session {
+  user: User & { subscriptionDueDate?: string };
 }
 
 export const {
@@ -41,6 +41,7 @@ export const {
 
       if (userDB) {
         token.id = userDB.id;
+        token.subscriptionDueDate = userDB.subscriptionDueDate;
       }
 
       return token;
@@ -54,6 +55,7 @@ export const {
     }) {
       if (session.user) {
         session.user.id = token.id as string;
+        session.user.subscriptionDueDate = token.subscriptionDueDate
       }
 
       return session;

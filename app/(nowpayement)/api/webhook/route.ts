@@ -49,8 +49,10 @@ export async function POST(req: Request) {
     const uid = data.order_id;
 
     try {
-        const newDueDate = new Date();
-        newDueDate.setMonth(newDueDate.getMonth() + 1); // Add 1 month to the current date
+        const [userAccount] = await db.select().from(user).where(eq(user.id, uid));
+        const dueDate  = userAccount.subscriptionDueDate !== null ? new Date(userAccount.subscriptionDueDate) : new Date();
+
+        const newDueDate = new Date(dueDate.setMonth(dueDate.getMonth() + 1));
 
         await db
             .update(user)

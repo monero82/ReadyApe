@@ -15,6 +15,8 @@ import { useArtifactSelector } from '@/hooks/use-artifact';
 import { toast } from 'sonner';
 import Image from 'next/image';
 import axios from 'axios';
+import { getSession } from 'next-auth/react';
+import { ExtendedSession } from '@/app/(auth)/auth';
 
 export function Chat({
   id,
@@ -56,24 +58,26 @@ export function Chat({
     },
   });
 
-
-
+  const [payLoading, setPayLoading] = useState(false);
 
   const handlePayClick = async () => {
+    setPayLoading(true);
     try {
-            const response = await axios.get(`/api/invoice`);
-    
-            if (!response.data || !response.data.invoice_url) {
-              throw new Error('Failed to create payment URL');
-            }
-    
-            const data = response.data;
-            window.open(data.invoice_url, '_blank');
-          } catch (error) {
-            console.error('Error creating payment URL:', error);
-            toast.error('Failed to generate payment URL. Please try again.');
-          }
-  }
+      const response = await axios.get(`/api/invoice`);
+
+      if (!response.data || !response.data.invoice_url) {
+        throw new Error('Failed to create payment URL');
+      }
+
+      const data = response.data;
+      window.location.href = data.invoice_url;
+    } catch (error) {
+      console.error('Error creating payment URL:', error);
+      toast.error('Failed to generate payment URL. Please try again.');
+    } finally {
+      setPayLoading(false);
+    }
+  };
 
   const { data: votes } = useSWR<Array<Vote>>(
     `/api/vote?chatId=${id}`,
@@ -90,9 +94,10 @@ export function Chat({
     setSubmissionCount((prev) => prev + 1);
     handleSubmit();
   };
+  const [session , setSession] = useState<ExtendedSession | null >(null);
 
   useEffect(() => {
-    if (submissionCount >= 0) {
+    if (submissionCount >= 3 && ( !session?.user?.subscriptionDueDate || new Date(session.user.subscriptionDueDate) < new Date())) {
       setShowPayPalDialog(true);
     }
   }, [submissionCount]);
@@ -100,6 +105,16 @@ export function Chat({
   const closePayPalDialog = () => {
     setShowPayPalDialog(false);
   };
+
+  useEffect(() => {
+    const fetchSession = async () => {
+      const sessionNew = await getSession();
+      setSession(sessionNew as ExtendedSession);
+      console.log('Session:', sessionNew);
+    };
+
+    fetchSession();
+  }, []);
 
   return (
     <>
@@ -116,14 +131,17 @@ export function Chat({
               >
                 Cancel
               </button>
-<button    onClick={handlePayClick}>  <Image
+              <button
+                onClick={handlePayClick}
+                disabled={payLoading}
+              >
+                <Image
                   width={200}
                   height={30}
                   src="https://nowpayments.io/images/embeds/payment-button-white.svg"
-               
                   alt="Cryptocurrency & Bitcoin payment button by NOWPayments"
-                />  </button>
-              
+                />
+              </button>
             </div>
           </div>
         </div>

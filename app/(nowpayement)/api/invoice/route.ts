@@ -18,8 +18,8 @@ export async function GET(req: NextRequest) {
         "order_id": session.user.id,
         "order_description": "server hosting",
         "ipn_callback_url": process.env.NOWPAYEMET_IPN_CALLBACK_URL || '',
-        "success_url": "https://google.com",
-        "cancel_url": "https://youtube.com"
+        "success_url": process.env.AUTH_TRUST_HOST || 'http://localhost:3000',
+        "cancel_url": process.env.AUTH_TRUST_HOST || 'http://localhost:3000',
       }
     const response = await axios.post(`${process.env.NOWPAYEMET_API_URL}/v1/invoice`,data, {
       headers: {
