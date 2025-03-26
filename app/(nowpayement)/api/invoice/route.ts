@@ -1,27 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
-import getServerSession from 'next-auth';
 import axios from 'axios';
-import { authConfig } from '@/app/(auth)/auth.config';
-
+import { auth } from '@/app/(auth)/auth';
 
 export async function GET(req: NextRequest) {
   // Check if the user is authenticated using next-auth
-  const session = await getServerSession(authConfig);
+  const session = await auth();
 
-  
-  if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!session || !session.user) {
+    return Response.json('Unauthorized!', { status: 401 });
   }
-
-console.log('====' ,  process.env.NOWPAYEMET_API_KEY);
-
 
 
   try {
     const data = {
         "price_amount": process.env.NOWPAYEMET_PRICE_AMOUNT || 20,
         "price_currency": "usd",
-        "order_id": "RGDBP-21314dsfa",
+        "order_id": session.user.id,
         "order_description": "server hosting",
         "ipn_callback_url": process.env.NOWPAYEMET_IPN_CALLBACK_URL || '',
         "success_url": "https://google.com",
