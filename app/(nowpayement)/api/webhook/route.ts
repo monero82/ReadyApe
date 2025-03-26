@@ -47,6 +47,13 @@ export async function POST(req: Request) {
     console.log('Method: POST');
     console.log('Data:', data);
     const uid = data.order_id;
+    const payementStatus = data.payment_status;
+
+    if (payementStatus !== 'finished') {
+        console.error('Payment status is not finished:', payementStatus);
+        return new Response('Payment not completed', { status: 400 });
+    }
+    
 
     try {
         const [userAccount] = await db.select().from(user).where(eq(user.id, uid));
