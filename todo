@@ -16,8 +16,9 @@
 - [X] keep just copy
 
 
-- [ ] send readme start project
-- [ ] deploy app + link domain name
-- [ ] check web.com for smtp service 
+- [X] send readme start project
+- [X] deploy app
+- [ ]  link domain name
+- [X] check web.com for smtp service 
 
 

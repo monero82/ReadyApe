@@ -9,6 +9,7 @@ import { SubmitButton } from '@/components/submit-button';
 
 import { register, type RegisterActionState } from '../actions';
 import { toast } from '@/components/toast';
+import Image from 'next/image';
 
 export default function Page() {
   const router = useRouter();
@@ -49,6 +50,16 @@ export default function Page() {
   return (
     <div className="flex h-dvh w-screen items-start pt-12 md:pt-0 md:items-center justify-center bg-background">
       <div className="w-full max-w-md overflow-hidden rounded-2xl gap-12 flex flex-col">
+         <div className="size-70 rounded-full border-2 border-white flex items-center justify-center mx-auto">
+                  <Image
+                src="/images/ready_ape.png"
+                alt="ready ape Logo"
+                width={200}
+                height={200}
+                className="rounded-full"
+                  />
+                 
+                  </div>
         <div className="flex flex-col items-center justify-center gap-2 px-4 text-center sm:px-16">
           <h3 className="text-xl font-semibold dark:text-zinc-50">Sign Up</h3>
           <p className="text-sm text-gray-500 dark:text-zinc-400">
