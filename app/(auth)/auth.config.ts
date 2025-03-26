@@ -17,6 +17,12 @@ export const authConfig = {
       const isOnLogin = nextUrl.pathname.startsWith('/login');
       const isOnGoogleAuth = nextUrl.pathname.startsWith('/api/auth');
 
+      const isWebhook = nextUrl.pathname.startsWith('/api/webhook');
+
+if(isWebhook) {
+  return true;
+}
+
       if (isLoggedIn && (isOnLogin || isOnRegister)) {
         return Response.redirect(new URL('/', nextUrl as unknown as URL));
       }

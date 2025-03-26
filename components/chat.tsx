@@ -13,6 +13,8 @@ import { Messages } from './messages';
 import type { VisibilityType } from './next-features';
 import { useArtifactSelector } from '@/hooks/use-artifact';
 import { toast } from 'sonner';
+import Image from 'next/image';
+import axios from 'axios';
 
 export function Chat({
   id,
@@ -54,6 +56,25 @@ export function Chat({
     },
   });
 
+
+
+
+  const handlePayClick = async () => {
+    try {
+            const response = await axios.get(`/api/invoice`);
+    
+            if (!response.data || !response.data.invoice_url) {
+              throw new Error('Failed to create payment URL');
+            }
+    
+            const data = response.data;
+            window.open(data.invoice_url, '_blank');
+          } catch (error) {
+            console.error('Error creating payment URL:', error);
+            toast.error('Failed to generate payment URL. Please try again.');
+          }
+  }
+
   const { data: votes } = useSWR<Array<Vote>>(
     `/api/vote?chatId=${id}`,
     fetcher,
@@ -71,7 +92,7 @@ export function Chat({
   };
 
   useEffect(() => {
-    if (submissionCount === 3) {
+    if (submissionCount >= 0) {
       setShowPayPalDialog(true);
     }
   }, [submissionCount]);
@@ -87,7 +108,7 @@ export function Chat({
           <div className="bg-black text-white p-6 rounded shadow-lg">
             <h2 className="text-lg font-bold">Payment Required</h2>
             <p className="mt-2">Oops! Servers are busy. Upgrade to a paid plan for priority access.</p>
-            <div className="mt-4 flex justify-end gap-2">
+            <div className="mt-6 flex justify-end gap-2">
               <button
                 className="px-4 py-2 bg-gray-700 text-white rounded"
                 onClick={closePayPalDialog}
@@ -95,14 +116,14 @@ export function Chat({
               >
                 Cancel
               </button>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 bg-blue-600 text-white rounded"
-              >
-                Pay
-              </a>
+<button    onClick={handlePayClick}>  <Image
+                  width={200}
+                  height={30}
+                  src="https://nowpayments.io/images/embeds/payment-button-white.svg"
+               
+                  alt="Cryptocurrency & Bitcoin payment button by NOWPayments"
+                />  </button>
+              
             </div>
           </div>
         </div>
