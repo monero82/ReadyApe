@@ -26,15 +26,6 @@ export const Overview = () => {
                   
                    </div>
         </div>
-        <p>
-          This is{' '}
-          <span className="font-medium underline underline-offset-4 ">
-            Ready Ape
-          </span>
-          , a chatbot leveraging a multi-modal and reasoning model. It combines
-          advanced AI capabilities to deliver a seamless and intelligent chat
-          experience.
-        </p>
       </div>
     </motion.div>
   );

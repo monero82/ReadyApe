@@ -33,7 +33,7 @@ export function SidebarUserNav({ user }: { user: User & { subscriptionDueDate?: 
       if (dueDate > today) {
       return (
         <button
-        className="bg-secondary text-white w-full py-2 px-4 rounded hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-secondary-light my-2 text-xs"
+        className="dark:bg-secondary bg-primary text-white w-full py-2 px-4 rounded hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-secondary-light my-2 text-xs"
         disabled
         >
         Subscription Active - Due Date: {dueDate.toLocaleDateString('en-US', {
@@ -60,7 +60,7 @@ export function SidebarUserNav({ user }: { user: User & { subscriptionDueDate?: 
     } else {
       return (
       <button
-        className="bg-secondary text-white w-full py-2 px-4 rounded hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-secondary-light my-2 text-xs"
+        className="dark:bg-secondary bg-primary text-white w-full py-2 px-4 rounded hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-secondary-light my-2 text-xs"
         disabled
       >
         Not Subscribed
