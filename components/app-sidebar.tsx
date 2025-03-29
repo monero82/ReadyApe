@@ -19,12 +19,19 @@ import {
 import Link from 'next/link';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 export function AppSidebar({ user }: { user: User | undefined }) {
   const router = useRouter();
   const { setOpenMobile } = useSidebar();
   const { theme } = useTheme();
+  const [imageText, setImageText] = useState<string>('/images/logo_text.png');
 
+  useEffect(() => {
+    console.log('theme', theme);
+    let imageText = theme === 'dark' ? '/images/logo_text.png' : '/images/logo_text_dark.png';
+    setImageText(imageText);
+  }, [theme]);
   return (
     <Sidebar className="group-data-[side=left]:border-r-0">
       <SidebarHeader>
@@ -38,7 +45,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
               className="flex flex-row gap-3 items-center"
             >
               <Image
-                src={theme === 'dark' ? '/images/logo_text.png' : '/images/logo_text_dark.png'}
+                src={imageText}
                 alt="ready ape Logo"
                 width={250}
                 height={250}

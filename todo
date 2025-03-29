@@ -4,7 +4,7 @@
 - [X] Plan next features
 - [X] Implement color grouping for messages (e.g., another group in blue)
 - [X] Add authentication (Google + basic authentication)
-- [ ] Check payment gateway integration: https://nowpayments.io
+- [X] Check payment gateway integration: https://nowpayments.io
 - [X] Enable sending all messages
 - [X] change the logo in auth and change  text in chat
 
