@@ -55,18 +55,17 @@ export default function Page() {
 
       <div className="size-70 rounded-full border-2 border-white flex items-center justify-center mx-auto">
           <Image
-        src="/images/ready_ape.png"
+        src="/images/logo_all.png"
         alt="ready ape Logo"
-        width={200}
-        height={200}
+        width={250}
+        height={250}
         className="rounded-full"
           />
          
           </div>
 
           <div className="text-center mt-4">
-            <h1 className="text-2xl font-bold text-white">Ready Ape</h1>
-            <p className="text-sm text-gray-300 mb-3">A chatbot AI that answers every request</p></div>
+            <p className="text-sm  mb-3 dark:text-white">A chatbot AI that answers every request</p></div>
 
        
         <AuthForm action={handleSubmit} defaultEmail={email}>

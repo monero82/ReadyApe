@@ -7,6 +7,7 @@ import { PlusIcon, UserIcon } from '@/components/icons';
 import { SidebarHistory } from '@/components/sidebar-history';
 import { SidebarUserNav } from '@/components/sidebar-user-nav';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 import {
   Sidebar,
   SidebarContent,
@@ -17,10 +18,12 @@ import {
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
+import { useTheme } from 'next-themes';
 
 export function AppSidebar({ user }: { user: User | undefined }) {
   const router = useRouter();
   const { setOpenMobile } = useSidebar();
+  const { theme } = useTheme();
 
   return (
     <Sidebar className="group-data-[side=left]:border-r-0">
@@ -34,9 +37,12 @@ export function AppSidebar({ user }: { user: User | undefined }) {
               }}
               className="flex flex-row gap-3 items-center"
             >
-              <span className="text-3xl font-semibold px-2 hover:bg-muted rounded-md cursor-pointer">
-                Ready Ape
-              </span>
+              <Image
+                src={theme === 'dark' ? '/images/logo_text.png' : '/images/logo_text_dark.png'}
+                alt="ready ape Logo"
+                width={250}
+                height={250}
+              />
             </Link>
             <Tooltip>
               <TooltipTrigger asChild>
