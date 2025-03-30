@@ -65,7 +65,7 @@ export default function Page() {
           </div>
 
           <div className="text-center mt-4">
-            <p className="text-sm  mb-3 dark:text-white">A chatbot AI that answers every request</p></div>
+            <p className="text-sm  mb-3 dark:text-white">An AI that learns, adapts, and evolves.</p></div>
 
        
         <AuthForm action={handleSubmit} defaultEmail={email}>

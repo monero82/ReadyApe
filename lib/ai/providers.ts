@@ -6,6 +6,7 @@ import {
 import { openai } from '@ai-sdk/openai';
 import { fireworks } from '@ai-sdk/fireworks';
 import { isTestEnvironment } from '../constants';
+
 import {
   artifactModel,
   chatModel,
@@ -40,3 +41,4 @@ export const myProvider = isTestEnvironment
         'large-model': openai.image('dall-e-3'),
       },
     });
+

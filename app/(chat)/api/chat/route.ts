@@ -25,6 +25,7 @@ import { getWeather } from '@/lib/ai/tools/get-weather';
 import { isProductionEnvironment } from '@/lib/constants';
 import { NextResponse } from 'next/server';
 import { myProvider } from '@/lib/ai/providers';
+import { AIClient } from '@/lib/ai/AIClient';
 
 export const maxDuration = 60;
 
@@ -73,7 +74,7 @@ export async function POST(request: Request) {
     return createDataStreamResponse({
       execute: (dataStream) => {
         const result = streamText({
-          model: myProvider.languageModel(selectedChatModel),
+          model:new AIClient({userEmail: session?.user?.email}),
           system: systemPrompt({ selectedChatModel }),
           messages,
           maxSteps: 5,

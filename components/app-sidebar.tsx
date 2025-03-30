@@ -28,7 +28,6 @@ export function AppSidebar({ user }: { user: User | undefined }) {
   const [imageText, setImageText] = useState<string>('/images/logo_text.png');
 
   useEffect(() => {
-    console.log('theme', theme);
     let imageText = theme === 'dark' ? '/images/logo_text.png' : '/images/logo_text_dark.png';
     setImageText(imageText);
   }, [theme]);

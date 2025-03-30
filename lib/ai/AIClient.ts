@@ -1,9 +1,6 @@
 import type { LanguageModelV1, LanguageModelV1StreamPart } from 'ai';
 
-type LanguageModelV1TextPart = {
-  type: 'text';
-  text: string;
-};
+
 
 async function fetchStream(
   url: string,
@@ -88,13 +85,14 @@ class AIClient implements LanguageModelV1 {
   doStream: LanguageModelV1['doStream'];
   readonly defaultObjectGenerationMode: LanguageModelV1['defaultObjectGenerationMode'];
   readonly supportsStructuredOutputs: LanguageModelV1['supportsStructuredOutputs'];
-
+  readonly userEmail: string | null | undefined;
   constructor({
     provider,
     modelId,
     supportsUrl,
     defaultObjectGenerationMode,
     supportsStructuredOutputs,
+    userEmail
   }: {
     provider?: LanguageModelV1['provider'];
     modelId?: LanguageModelV1['modelId'];
@@ -102,12 +100,15 @@ class AIClient implements LanguageModelV1 {
     doGenerate?: LanguageModelV1['doGenerate'];
     defaultObjectGenerationMode?: LanguageModelV1['defaultObjectGenerationMode'];
     supportsStructuredOutputs?: LanguageModelV1['supportsStructuredOutputs'];
+    userEmail?: string | null | undefined;
   } = {}) {
+   
     this.provider = provider || 'default-provider';
     this.modelId = modelId || 'default-model';
+    this.userEmail = userEmail || null;
     this.supportsUrl = supportsUrl;
     this.doGenerate = async ({ inputFormat, prompt }) => {
-      const resultText = await fetchResponse(this.url, { prompt: prompt });
+      const resultText = await fetchResponse(`${this.url}/title`, { prompt: prompt });
 
       return {
         text: resultText,
@@ -121,7 +122,7 @@ class AIClient implements LanguageModelV1 {
     };
     this.doStream = async ({ inputFormat, prompt }) => {
       return {
-        stream: await fetchStream(this.url, { prompt: prompt }),
+        stream: await fetchStream(`${this.url}?email=${this.userEmail}`, { prompt: prompt }),
         rawCall: {
           rawPrompt: prompt,
           rawSettings: {},

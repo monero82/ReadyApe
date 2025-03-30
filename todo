@@ -22,7 +22,7 @@
 - [X] check web.com for smtp service
 
 
-- [ ] model name is ready ape R1
+- [X] model name is ready ape R1
 - [X] sign up show name of app
 - [X] change email place holder to nothing
 - [X] change logo on sing in and sign up with 
@@ -30,6 +30,10 @@
 - [X] keep hello logo 
 - [X] if possible to change to new logo
 - [X] after 20 msg shut down for 
-- [ ] change subscritpio for 23 
-
+- [X] change subscritpio for 23 
+- [X] test qwen alibaba 
+- [X] check for four model (optimized)
+- [X] show user email on backend
+- [ ] change next feature txt
+- [X] A chatbot AI that answers every request >> An AI that learns, adapts, and evolves.
 

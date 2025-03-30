@@ -116,6 +116,8 @@ export function Chat({
     fetchSession();
   }, []);
 
+
+
   return (
     <>
       {showPayPalDialog && (
