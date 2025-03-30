@@ -117,7 +117,7 @@ const PurePreviewMessage = ({
                   className={cn('flex flex-col gap-4', {
                     'bg-gray-800 text-primary-foreground px-3 py-2 rounded-xl':
                       message.role === 'user',
-                    'text-green-600': true, // Added text color green
+                    'text-green-600': true, // Added text color green 
                   })}
                 >
                   <Markdown>{message.content as string}</Markdown>
