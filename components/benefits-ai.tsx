@@ -37,7 +37,7 @@ export function BenefitsAI({
         className="md:px-2 md:h-[34px]"
         onClick={() => setDialogOpen(true)} // Open dialog on button click
       >
-        The Benefits of AI
+        Ready Ape R1
       </Button>
 
       {/* Dialog for displaying AI benefits */}
@@ -45,7 +45,7 @@ export function BenefitsAI({
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Benefits of AI</DialogTitle>
+              <DialogTitle>Ready Ape R1</DialogTitle>
             </DialogHeader>
             <p>
               Artificial Intelligence (AI) enables the automation of repetitive
