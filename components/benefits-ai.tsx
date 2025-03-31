@@ -96,7 +96,7 @@ export function BenefitsAI({
           This was not programmed. It was self-evolved.
         </p>
         <p className="text-gray-700 dark:text-gray-300 text-lg italic">
-          “We gave R1 the space to learn. What we didn’t expect was that it would build its own internal logic and teach itself to think differently. That’s when I knew we weren’t just training a model — we were witnessing the birth of a new cognitive framework.”
+          “We gave R1 the space to learn. What we didn&apos;t expect was that it would build its own internal logic and teach itself to think differently. That&apos;s when I knew we weren&apos;t just training a model — we were witnessing the birth of a new cognitive framework.”
         </p>
         <p className="text-gray-700 dark:text-gray-300 text-lg mb-6">
           — <span className="font-bold">Dr. Linh Pham</span>, Lead AI Architect, Ready Ape Project (Vietnam)
