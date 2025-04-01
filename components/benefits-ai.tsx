@@ -57,7 +57,7 @@ export function BenefitsAI({
     ];
   
     return (
-      <div className="min-h-screen bg-white text-black dark:bg-black dark:text-white p-8">
+      <div className="min-h-screen bg-white text-black dark:bg-black dark:text-white ">
         <h1 className="text-3xl font-bold flex items-center mb-6">
           🦍 Ready Ape R1
         </h1>
@@ -103,32 +103,32 @@ export function BenefitsAI({
         </p>
       
           <h2 className="text-xl font-bold mb-4 text-blue-500 dark:text-blue-400">📊 AI Performance Benchmark – Q1 2025</h2>
-          <table className="min-w-full border bg-gray-100 dark:bg-gray-800 ">
+            <table className="table-auto text-[10px] border bg-gray-100 dark:bg-gray-800">
             <thead>
               <tr className="bg-gray-200 dark:bg-gray-800">
-                <th className="p-3 text-left">Evaluation Task</th>
-                <th className="p-3">Ready Ape R1</th>
-                <th className="p-3">DeepSeek</th>
-                <th className="p-3">xAI Grok</th>
-                <th className="p-3">ChatGPT-4</th>
-                <th className="p-3">Claude 2.1</th>
-                <th className="p-3">Gemini Ultra</th>
+              <th className="px-1 py-0.5 text-left">Task</th>
+              <th className="px-1 py-0.5">R1</th>
+              <th className="px-1 py-0.5">DeepSeek</th>
+              <th className="px-1 py-0.5">Grok</th>
+              <th className="px-1 py-0.5">ChatGPT</th>
+              <th className="px-1 py-0.5">Claude</th>
+              <th className="px-1 py-0.5">Gemini</th>
               </tr>
             </thead>
             <tbody>
               {data.map((row, index) => (
-                <tr key={index} className="border-t border-gray-300 dark:border-gray-700">
-                  <td className="p-3">{row.task}</td>
-                  <td className="p-3 text-green-500 dark:text-green-400">{row.r1}</td>
-                  <td className="p-3">{row.deepSeek}</td>
-                  <td className="p-3">{row.grok}</td>
-                  <td className="p-3">{row.chatGPT}</td>
-                  <td className="p-3">{row.claude}</td>
-                  <td className="p-3">{row.gemini}</td>
-                </tr>
+              <tr key={index} className="border-t border-gray-300 dark:border-gray-700">
+              <td className="px-1 py-0.5">{row.task}</td>
+              <td className="px-1 py-0.5 text-green-500 dark:text-green-400">{row.r1}</td>
+              <td className="px-1 py-0.5">{row.deepSeek}</td>
+              <td className="px-1 py-0.5">{row.grok}</td>
+              <td className="px-1 py-0.5">{row.chatGPT}</td>
+              <td className="px-1 py-0.5">{row.claude}</td>
+              <td className="px-1 py-0.5">{row.gemini}</td>
+              </tr>
               ))}
             </tbody>
-          </table>
+            </table>
           <p className="text-sm mt-3 text-gray-500 dark:text-gray-400 mb-6">Evaluated by SimuEval Q1 benchmark suite. April 2025.</p>
     
             <div className="flex justify-center mt-6">
@@ -174,8 +174,8 @@ export function BenefitsAI({
 
       {/* Dialog for displaying AI benefits */}
       {dialogOpen && (
-        <Dialog open={dialogOpen} onOpenChange={setDialogOpen} >
-          <DialogContent className="max-h-[80vh] overflow-y-auto w-[90vw] max-w-[1200px] dark:bg-black bg-white"> {/* Increase dialog width */}
+        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+          <DialogContent className="max-h-[80vh] overflow-y-auto w-[90vw]  dark:bg-black bg-white"> {/* Increase dialog width */}
            
             {AIBenchmark()}
           </DialogContent>

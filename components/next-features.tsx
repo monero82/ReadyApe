@@ -55,7 +55,7 @@ export function NextFeatures({
   );
 
   const nextFeatures = ()=> {
-    return( <div className="min-h-screen bg-white text-black dark:bg-black dark:text-white p-8">
+    return( <div className="min-h-screen bg-white text-black dark:bg-black dark:text-white">
   <h1 className="text-3xl font-bold flex items-center mb-6">🔮 What&apos;s Next: Introducing Project R2 (Codename: Neogen)</h1>
 
   <p className="text-gray-700 dark:text-gray-300 text-lg mb-6">
@@ -113,7 +113,7 @@ export function NextFeatures({
         The Next Features
       </Button>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-h-[80vh] overflow-y-auto w-[90vw] max-w-[1200px] dark:bg-black bg-white">
+        <DialogContent className="max-h-[80vh] overflow-y-auto w-[90vw]  dark:bg-black bg-white">
          {nextFeatures()}
         </DialogContent>
       </Dialog>
