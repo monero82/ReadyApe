@@ -103,7 +103,7 @@ export function BenefitsAI({
         </p>
       
           <h2 className="text-xl font-bold mb-4 text-blue-500 dark:text-blue-400">📊 AI Performance Benchmark – Q1 2025</h2>
-            <table className="table-auto text-[10px] border bg-gray-100 dark:bg-gray-800">
+            <table className={`table-auto border bg-gray-100 dark:bg-gray-800 ${window.innerWidth > 768 ? 'text-sm' : 'text-[10px]'}`}>
             <thead>
               <tr className="bg-gray-200 dark:bg-gray-800">
               <th className="px-1 py-0.5 text-left">Task</th>
@@ -175,7 +175,7 @@ export function BenefitsAI({
       {/* Dialog for displaying AI benefits */}
       {dialogOpen && (
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-          <DialogContent className="max-h-[80vh] overflow-y-auto w-[90vw]  dark:bg-black bg-white"> {/* Increase dialog width */}
+          <DialogContent className="max-h-[80vh] overflow-y-auto w-[90vw] max-w-[1200px]   dark:bg-black bg-white"> {/* Increase dialog width */}
            
             {AIBenchmark()}
           </DialogContent>

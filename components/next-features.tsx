@@ -113,7 +113,7 @@ export function NextFeatures({
         The Next Features
       </Button>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-h-[80vh] overflow-y-auto w-[90vw]  dark:bg-black bg-white">
+        <DialogContent className="max-h-[80vh] overflow-y-auto w-[90vw] max-w-[1200px]  dark:bg-black bg-white">
          {nextFeatures()}
         </DialogContent>
       </Dialog>
