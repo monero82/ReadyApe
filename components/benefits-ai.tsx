@@ -32,30 +32,30 @@ export function BenefitsAI({
       { task: "Self-Correction Efficiency (post-prompt eval)", r1: "91.7%", deepSeek: "68.4%", grok: "65.5%", chatGPT: "81.3%", claude: "85.2%", gemini: "83.7%" },
       { task: "Hallucination Resistance (controlled prompts)", r1: "99.2%", deepSeek: "88.0%", grok: "84.4%", chatGPT: "91.2%", claude: "93.1%", gemini: "92.3%" },
     ];
-  
+
     const features = [
-      { 
-      title: "Neolex Language Core", 
-      description: "An intermediate cognitive scaffold that structures meaning, not just syntax. Neolex blends logic trees, emotional states, and context-aware pathways to make responses more thoughtful and flexible." 
+      {
+      title: "Neolex Language Core",
+      description: "An intermediate cognitive scaffold that structures meaning, not just syntax. Neolex blends logic trees, emotional states, and context-aware pathways to make responses more thoughtful and flexible."
       },
-      { 
-      title: "Self-Evolving Internal Language", 
-      description: "During training, R1 began refactoring Neolex on its own — creating a faster, more abstract internal logic system still in use today. This self-generated structure improved conceptual compression and decision latency by over 60%." 
+      {
+      title: "Self-Evolving Internal Language",
+      description: "During training, R1 began refactoring Neolex on its own — creating a faster, more abstract internal logic system still in use today. This self-generated structure improved conceptual compression and decision latency by over 60%."
       },
-      { 
-      title: "Adaptive Memory Protocol (AMP)", 
-      description: "R1 builds evolving memory snapshots over time. It doesn’t just remember facts — it refines its understanding of the user across conversations." 
+      {
+      title: "Adaptive Memory Protocol (AMP)",
+      description: "R1 builds evolving memory snapshots over time. It doesn’t just remember facts — it refines its understanding of the user across conversations."
       },
-      { 
-      title: "Multimodal Reinforcement Learning", 
-      description: "R1 was trained using a blend of text, dialogue, code, visuals, and interactive role-based feedback — allowing it to reason like a human in practical scenarios." 
+      {
+      title: "Multimodal Reinforcement Learning",
+      description: "R1 was trained using a blend of text, dialogue, code, visuals, and interactive role-based feedback — allowing it to reason like a human in practical scenarios."
       },
-      { 
-      title: "Meta-Prompt Reflection", 
-      description: "Post-batch, R1 self-analyzes and rewrites its internal prompts. This unsupervised loop enables prompt optimization without external guidance." 
+      {
+      title: "Meta-Prompt Reflection",
+      description: "Post-batch, R1 self-analyzes and rewrites its internal prompts. This unsupervised loop enables prompt optimization without external guidance."
       },
     ];
-  
+
     return (
       <div className="min-h-screen bg-white text-black dark:bg-black dark:text-white ">
         <h1 className="text-3xl font-bold flex items-center mb-6">
@@ -70,7 +70,7 @@ export function BenefitsAI({
       <p className="text-gray-700 dark:text-gray-300 text-lg mb-6">
       Built using a new class of symbolic cognition called Neolex, R1 is faster, more coherent, and strikingly human in tone. In internal benchmarks, it has outperformed every major AI across logic, empathy, language fluency, and long-form dialogue.
       </p>
-    
+
       <h2 className="text-gray-700 dark:text-gray-300 text-lg font-bold mb-4">
       🧬 How Ready Ape R1 Was Trained
         </h2>
@@ -101,7 +101,7 @@ export function BenefitsAI({
         <p className="text-gray-700 dark:text-gray-300 text-lg mb-6">
           — <span className="font-bold">Dr. Linh Pham</span>, Lead AI Architect, Ready Ape Project (Vietnam)
         </p>
-      
+
           <h2 className="text-xl font-bold mb-4 text-blue-500 dark:text-blue-400">📊 AI Performance Benchmark – Q1 2025</h2>
             <table className={`table-auto border bg-gray-100 dark:bg-gray-800 ${window.innerWidth > 768 ? 'text-sm' : 'text-[10px]'}`}>
             <thead>
@@ -130,7 +130,7 @@ export function BenefitsAI({
             </tbody>
             </table>
           <p className="text-sm mt-3 text-gray-500 dark:text-gray-400 mb-6">Evaluated by SimuEval Q1 benchmark suite. April 2025.</p>
-    
+
             <div className="flex justify-center mt-6">
             <a
               href="https://x.com/ReadyApe_01"
@@ -145,12 +145,25 @@ export function BenefitsAI({
               />
               Follow us on X @ReadyApe_01
             </a>
+            <a
+  href="https://discord.gg/q6XGCEZw"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex items-center text-green-500 dark:text-green-400 hover:underline bg-secondary p-2 rounded mt-2"
+>
+  <img
+    src="/images/Discord-Symbol-Black.png"
+    alt="New Logo"
+    className="w-5 h-5 mr-2"
+  />
+  Follow us on Discord!
+</a>
             </div>
      
       </div>
     );
   };
-  
+
   const [optimisticModelId, setOptimisticModelId] =
     useOptimistic(selectedModelId);
 
@@ -176,7 +189,7 @@ export function BenefitsAI({
       {dialogOpen && (
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogContent className="max-h-[80vh] overflow-y-auto w-[90vw] max-w-[1200px]   dark:bg-black bg-white"> {/* Increase dialog width */}
-           
+
             {AIBenchmark()}
           </DialogContent>
         </Dialog>
