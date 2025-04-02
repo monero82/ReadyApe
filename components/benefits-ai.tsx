@@ -131,7 +131,7 @@ export function BenefitsAI({
             </table>
           <p className="text-sm mt-3 text-gray-500 dark:text-gray-400 mb-6">Evaluated by SimuEval Q1 benchmark suite. April 2025.</p>
 
-            <div className="flex justify-center mt-6">
+            <div className="flex flex-col items-center mt-6 space-y-3">
             <a
               href="https://x.com/ReadyApe_01"
               target="_blank"
@@ -159,7 +159,7 @@ export function BenefitsAI({
   Follow us on Discord!
 </a>
             </div>
-     
+
       </div>
     );
   };
