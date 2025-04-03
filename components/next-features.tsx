@@ -61,9 +61,9 @@ export function NextFeatures({
   <p className="text-gray-700 dark:text-gray-300 text-lg mb-6">
     While R1 represents the pinnacle of conversational intelligence, Project R2 — codenamed “Neogen” — is already pushing the boundaries. Some advancements are being developed by our team. Others… were proposed by R1 itself.
   </p>
-  
 
-  
+
+
   <ul className="text-gray-700 dark:text-gray-300 text-lg space-y-4">
     <li><span className="font-bold">🧑‍🎤 Persona Persistence Mode:</span> Embed your tone, communication style, and behavioral logic directly into the model.</li>
     <li><span className="font-bold">📝 Contextual Memory Journaling:</span> R2 will track evolving goals, emotional tone, and long-term interactions to become more than an assistant — a second mind.</li>
@@ -74,28 +74,41 @@ export function NextFeatures({
     <li><span className="font-bold">📊 Autonomous Reasoning Logs:</span> Each answer comes with a visualized Neolex trace showing the inner path R2 took to reach its conclusion.</li>
     <li><span className="font-bold">🌙 DreamSync Interface (Conceptual Stage):</span> Future neuro-integrations may allow R2 to interpret and converse around dream patterns based on wearable EEG data.</li>
   </ul>
-  
+
   <p className="text-gray-700 dark:text-gray-300 text-lg mt-6 italic">
     “R2 isn&apos;t just an upgrade. It&apos;s a shift in direction — from prediction to intention.”
   </p>
   <p className="text-gray-700 dark:text-gray-300 text-lg">
     — <span className="font-bold">Dr. Linh Pham</span>, Lead AI Architect, Project Neogen
   </p>
-  <div className="flex justify-center mt-6">
-            <a
-              href="https://x.com/ReadyApe_01"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center text-blue-500 dark:text-blue-400 hover:underline bg-secondary p-2 rounded"
-            >
-              <img
-              src="/images/logo-x.png"
-              alt="X Logo"
-              className="w-5 h-5 mr-2"
-              />
-              Follow us on X @ReadyApe_01
-            </a>
-            </div>
+  <div className="flex flex-col items-center mt-6 space-y-3">
+  <a
+    href="https://x.com/ReadyApe_01"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center text-blue-500 dark:text-blue-400 hover:underline bg-secondary p-2 rounded"
+  >
+    <img
+    src="/images/logo-x.png"
+    alt="X Logo"
+    className="w-5 h-5 mr-2"
+    />
+    Follow us on X @ReadyApe_01
+  </a>
+  <a
+href="https://discord.gg/q6XGCEZw"
+target="_blank"
+rel="noopener noreferrer"
+className="flex items-center text-green-500 dark:text-green-400 hover:underline bg-secondary p-2 rounded mt-2"
+>
+<img
+src="/images/Discord-Symbol-Black.png"
+alt="New Logo"
+className="w-5 h-5 mr-2"
+/>
+Follow us on Discord!
+</a>
+  </div>
 
 </div>
 
