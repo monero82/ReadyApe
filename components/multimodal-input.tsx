@@ -246,7 +246,20 @@ function PureMultimodalInput({
         }}
       />
 
-      <div className="absolute bottom-0 right-0 p-2 w-fit flex flex-row justify-end">
+      <div className="absolute bottom-0 right-0 p-2 w-fit flex flex-row justify-end gap-2">
+        <AttachmentsButton fileInputRef={fileInputRef} status={status} />
+        <Button
+          data-testid="reservation-button"
+          className="rounded-full p-1.5 h-fit border dark:border-zinc-600 size-[40px] bg-pink-500 hover:bg-pink-600 text-white"
+          onClick={(event) => {
+            event.preventDefault();
+            // Add reservation functionality here
+            setInput("I'd like to make a reservation for salon/massage/manicure/pedicure services. Can you help me with that?");
+          }}
+          title="Make a reservation"
+        >
+          <span className="text-xs font-bold">📅</span>
+        </Button>
         {status === 'submitted' ? (
           <StopButton stop={stop} setMessages={setMessages} />
         ) : (
