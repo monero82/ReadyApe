@@ -109,8 +109,8 @@ export function Chat({
     setShowPayPalDialog(false);
   };
 
-  const sessionResult = typeof useSession === 'function' ? useSession() : {};
-  const session = sessionResult?.data;
+  const sessionResult = typeof useSession === 'function' ? useSession() : { data: undefined };
+  const session = sessionResult.data;
 
   // Event modal state
   const [showAddEvent, setShowAddEvent] = useState(false);
