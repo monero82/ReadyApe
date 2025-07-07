@@ -97,7 +97,6 @@ export function Chat({
     setSubmissionCount((prev) => prev + 1);
     handleSubmit();
   };
-  const [session , setSession] = useState<ExtendedSession | null >(null);
 
   useEffect(() => {
     if (submissionCount >= 3 && ( !session?.user?.subscriptionDueDate || new Date(session.user.subscriptionDueDate) < new Date())) {
@@ -108,16 +107,6 @@ export function Chat({
   const closePayPalDialog = () => {
     setShowPayPalDialog(false);
   };
-
-  useEffect(() => {
-    const fetchSession = async () => {
-      const sessionNew = await getSession();
-      setSession(sessionNew as ExtendedSession);
-      console.log('Session:', sessionNew);
-    };
-
-    fetchSession();
-  }, []);
 
   const { data: session } = useSession();
 
