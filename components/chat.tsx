@@ -15,8 +15,11 @@ import { useArtifactSelector } from '@/hooks/use-artifact';
 import { toast } from 'sonner';
 import Image from 'next/image';
 import axios from 'axios';
-import { getSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import { ExtendedSession } from '@/app/(auth)/auth';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
+import { Input } from './ui/input';
+import { Textarea } from './ui/textarea';
 
 export function Chat({
   id,
@@ -116,7 +119,65 @@ export function Chat({
     fetchSession();
   }, []);
 
+  const { data: session } = useSession();
 
+  // Event modal state
+  const [showAddEvent, setShowAddEvent] = useState(false);
+  const [showViewEvents, setShowViewEvents] = useState(false);
+  const [eventTitle, setEventTitle] = useState('');
+  const [eventDescription, setEventDescription] = useState('');
+  const [eventPhotoUrl, setEventPhotoUrl] = useState('');
+  const [eventTime, setEventTime] = useState('');
+  const [eventLoading, setEventLoading] = useState(false);
+  const [eventError, setEventError] = useState('');
+  const [events, setEvents] = useState<any[]>([]);
+
+  // Add Event handler
+  const handleAddEvent = async () => {
+    setEventLoading(true);
+    setEventError('');
+    try {
+      const res = await fetch('http://localhost:8000/events/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user_id: session?.user?.id,
+          title: eventTitle,
+          description: eventDescription,
+          photo_url: eventPhotoUrl,
+          event_time: eventTime || null,
+        }),
+      });
+      if (!res.ok) throw new Error('Failed to add event');
+      setShowAddEvent(false);
+      setEventTitle('');
+      setEventDescription('');
+      setEventPhotoUrl('');
+      setEventTime('');
+      toast.success('Event added!');
+    } catch (e: any) {
+      setEventError(e.message);
+    } finally {
+      setEventLoading(false);
+    }
+  };
+
+  // View Events handler
+  const handleViewEvents = async () => {
+    setEventLoading(true);
+    setEventError('');
+    try {
+      const res = await fetch(`http://localhost:8000/events/?user_id=${session?.user?.id}`);
+      if (!res.ok) throw new Error('Failed to fetch events');
+      const data = await res.json();
+      setEvents(data.events || []);
+      setShowViewEvents(true);
+    } catch (e: any) {
+      setEventError(e.message);
+    } finally {
+      setEventLoading(false);
+    }
+  };
 
   return (
     <>
@@ -203,6 +264,88 @@ export function Chat({
         votes={votes}
         isReadonly={isReadonly}
       />
+
+      <div className="flex flex-row gap-2 justify-end px-4 pt-2">
+        <button
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          onClick={() => setShowAddEvent(true)}
+        >
+          Add Event
+        </button>
+        <button
+          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+          onClick={handleViewEvents}
+        >
+          View My Events
+        </button>
+      </div>
+
+      {/* Add Event Modal */}
+      <Dialog open={showAddEvent} onOpenChange={setShowAddEvent}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Add New Event</DialogTitle>
+          </DialogHeader>
+          <div className="flex flex-col gap-2">
+            <Input
+              placeholder="Title"
+              value={eventTitle}
+              onChange={e => setEventTitle(e.target.value)}
+            />
+            <Textarea
+              placeholder="Description"
+              value={eventDescription}
+              onChange={e => setEventDescription(e.target.value)}
+            />
+            <Input
+              placeholder="Photo URL"
+              value={eventPhotoUrl}
+              onChange={e => setEventPhotoUrl(e.target.value)}
+            />
+            <Input
+              type="datetime-local"
+              placeholder="Event Time"
+              value={eventTime}
+              onChange={e => setEventTime(e.target.value)}
+            />
+            {eventError && <div className="text-red-500 text-sm">{eventError}</div>}
+            <button
+              className="bg-blue-600 text-white px-4 py-2 rounded mt-2"
+              onClick={handleAddEvent}
+              disabled={eventLoading}
+            >
+              {eventLoading ? 'Adding...' : 'Add Event'}
+            </button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* View Events Modal */}
+      <Dialog open={showViewEvents} onOpenChange={setShowViewEvents}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>My Events</DialogTitle>
+          </DialogHeader>
+          {eventLoading ? (
+            <div>Loading...</div>
+          ) : eventError ? (
+            <div className="text-red-500">{eventError}</div>
+          ) : events.length === 0 ? (
+            <div>No events found.</div>
+          ) : (
+            <ul className="space-y-2 max-h-96 overflow-y-auto">
+              {events.map(ev => (
+                <li key={ev.id} className="border rounded p-2">
+                  <div className="font-bold">{ev.title}</div>
+                  <div>{ev.description}</div>
+                  {ev.photo_url && <img src={ev.photo_url} alt="event" className="w-32 h-20 object-cover mt-1" />}
+                  <div className="text-xs text-gray-500 mt-1">{ev.event_time ? new Date(ev.event_time).toLocaleString() : ''}</div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
