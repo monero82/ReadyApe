@@ -98,11 +98,12 @@ export function Chat({
     handleSubmit();
   };
 
-  useEffect(() => {
-    if (submissionCount >= 3 && ( !session?.user?.subscriptionDueDate || new Date(session.user.subscriptionDueDate) < new Date())) {
-      setShowPayPalDialog(true);
-    }
-  }, [submissionCount]);
+  // Disabled subscriptionDueDate check due to missing property on User type
+  // useEffect(() => {
+  //   if (submissionCount >= 3 && ( !session?.user?.subscriptionDueDate || new Date(session.user.subscriptionDueDate) < new Date())) {
+  //     setShowPayPalDialog(true);
+  //   }
+  // }, [submissionCount]);
 
   const closePayPalDialog = () => {
     setShowPayPalDialog(false);
