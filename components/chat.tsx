@@ -15,8 +15,7 @@ import { useArtifactSelector } from '@/hooks/use-artifact';
 import { toast } from 'sonner';
 import Image from 'next/image';
 import axios from 'axios';
-import { getSession, useSession } from 'next-auth/react';
-import { ExtendedSession } from '@/app/(auth)/auth';
+import { useSession } from 'next-auth/react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
@@ -109,8 +108,7 @@ export function Chat({
     setShowPayPalDialog(false);
   };
 
-  const sessionResult = typeof useSession === 'function' ? useSession() : { data: undefined };
-  const session = sessionResult.data;
+  const { data: session } = useSession();
 
   // Event modal state
   const [showAddEvent, setShowAddEvent] = useState(false);
