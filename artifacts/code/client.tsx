@@ -134,7 +134,6 @@ export const codeArtifact = new Artifact<'code', Metadata>({
 
         try {
           // Pyodide code execution is temporarily disabled due to CSP issues
-          // @ts-expect-error - loadPyodide is not defined
           // const currentPyodideInstance = await globalThis.loadPyodide({
           //   indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.23.4/full/',
           // });
