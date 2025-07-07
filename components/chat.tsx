@@ -20,6 +20,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000";
+
 export function Chat({
   id,
   initialMessages,
@@ -126,7 +128,7 @@ export function Chat({
     setEventLoading(true);
     setEventError('');
     try {
-      const res = await fetch('http://localhost:8000/events/', {
+      const res = await fetch(`${API_BASE}/events/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -156,7 +158,7 @@ export function Chat({
     setEventLoading(true);
     setEventError('');
     try {
-      const res = await fetch(`http://localhost:8000/events/?user_id=${session?.user?.id}`);
+      const res = await fetch(`${API_BASE}/events/?user_id=${session?.user?.id}`);
       if (!res.ok) throw new Error('Failed to fetch events');
       const data = await res.json();
       setEvents(data.events || []);
