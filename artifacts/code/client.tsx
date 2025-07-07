@@ -133,75 +133,60 @@ export const codeArtifact = new Artifact<'code', Metadata>({
         }));
 
         try {
+          // Pyodide code execution is temporarily disabled due to CSP issues
           // @ts-expect-error - loadPyodide is not defined
-          const currentPyodideInstance = await globalThis.loadPyodide({
-            indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.23.4/full/',
-          });
+          // const currentPyodideInstance = await globalThis.loadPyodide({
+          //   indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.23.4/full/',
+          // });
 
-          currentPyodideInstance.setStdout({
-            batched: (output: string) => {
-              outputContent.push({
-                type: output.startsWith('data:image/png;base64')
-                  ? 'image'
-                  : 'text',
-                value: output,
-              });
-            },
-          });
+          // currentPyodideInstance.setStdout({
+          //   batched: (output: string) => {
+          //     outputContent.push({
+          //       type: output.startsWith('data:image/png;base64')
+          //         ? 'image'
+          //         : 'text',
+          //       value: output,
+          //     });
+          //   },
+          // });
 
-          await currentPyodideInstance.loadPackagesFromImports(content, {
-            messageCallback: (message: string) => {
-              setMetadata((metadata) => ({
-                ...metadata,
-                outputs: [
-                  ...metadata.outputs.filter((output) => output.id !== runId),
-                  {
-                    id: runId,
-                    contents: [{ type: 'text', value: message }],
-                    status: 'loading_packages',
-                  },
-                ],
-              }));
-            },
-          });
+          // await currentPyodideInstance.loadPackagesFromImports(content, {
+          //   messageCallback: (message: string) => {
+          //     setMetadata((metadata) => ({
+          //       ...metadata,
+          //       outputs: [
+          //         ...metadata.outputs.filter((output) => output.id !== runId),
+          //         {
+          //           id: runId,
+          //           contents: [{ type: 'text', value: message }],
+          //           status: 'loading_packages',
+          //         },
+          //       ],
+          //     }));
+          //   },
+          // });
 
-          const requiredHandlers = detectRequiredHandlers(content);
-          for (const handler of requiredHandlers) {
-            if (OUTPUT_HANDLERS[handler as keyof typeof OUTPUT_HANDLERS]) {
-              await currentPyodideInstance.runPythonAsync(
-                OUTPUT_HANDLERS[handler as keyof typeof OUTPUT_HANDLERS],
-              );
-
-              if (handler === 'matplotlib') {
-                await currentPyodideInstance.runPythonAsync(
-                  'setup_matplotlib_output()',
-                );
-              }
-            }
-          }
-
-          await currentPyodideInstance.runPythonAsync(content);
-
+          // Instead, show a message that code execution is disabled
           setMetadata((metadata) => ({
             ...metadata,
             outputs: [
               ...metadata.outputs.filter((output) => output.id !== runId),
               {
                 id: runId,
-                contents: outputContent,
-                status: 'completed',
+                contents: [{ type: 'text', value: 'Code execution is temporarily disabled due to security policy.' }],
+                status: 'error',
               },
             ],
           }));
-        } catch (error: any) {
+        } catch (e) {
           setMetadata((metadata) => ({
             ...metadata,
             outputs: [
               ...metadata.outputs.filter((output) => output.id !== runId),
               {
                 id: runId,
-                contents: [{ type: 'text', value: error.message }],
-                status: 'failed',
+                contents: [{ type: 'text', value: 'Error: ' + (e as Error).message }],
+                status: 'error',
               },
             ],
           }));
