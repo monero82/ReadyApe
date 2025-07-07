@@ -174,7 +174,7 @@ export const codeArtifact = new Artifact<'code', Metadata>({
               {
                 id: runId,
                 contents: [{ type: 'text', value: 'Code execution is temporarily disabled due to security policy.' }],
-                status: 'error',
+                status: 'failed',
               },
             ],
           }));
@@ -186,7 +186,7 @@ export const codeArtifact = new Artifact<'code', Metadata>({
               {
                 id: runId,
                 contents: [{ type: 'text', value: 'Error: ' + (e as Error).message }],
-                status: 'error',
+                status: 'failed',
               },
             ],
           }));
